@@ -1,0 +1,17 @@
+:root {
+  --darkthemeNavColor: #fff;
+  --darkthemeBgColor: #111111;
+  --lightthemeNavColor: #111111;
+  --lightthemeBgcolor: #fff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  width: 100vw;
+  padding: 0;
+}

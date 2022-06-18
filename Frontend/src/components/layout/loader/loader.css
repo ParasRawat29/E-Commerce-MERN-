@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+}
+.cardLoad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+  max-width: 200px;
+  margin: 10px;
+  border-radius: 5px;
+  padding: 5px;
+  /* background-color: rgb(88, 88, 88); */
+}
+.cardLoad > img {
+  height: 100px;
+  width: 100%;
+  background-color: #5a5a5a;
+  animation: skeleton 1s ease infinite alternate;
+}
+.cardBodyLoad {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin-top: 4px;
+}
+.cardBodyLoad .cardTitleLoad {
+  width: 200px;
+  height: 10px;
+  margin: 15px 0;
+  background-color: #5a5a5a;
+  animation: skeleton 1s ease infinite alternate;
+}
+.cardBodyLoad .cardPriceLoad,
+.cardBodyLoad .cardCategoryLoad {
+  width: 100px;
+  height: 10px;
+  margin: 5px 0;
+  background-color: #5a5a5a;
+  animation: skeleton 1s ease infinite alternate;
+}
+
+@keyframes skeleton {
+  to {
+    opacity: 0.5;
+  }
+}
