@@ -12,14 +12,18 @@ const ProductCardWrapper = styled(Link)`
   max-width: 260px;
   border-radius: 10px;
   text-decoration: none;
+
   .card {
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-grow: 1;
     justify-content: center;
-    height: max-content;
     width: 100%;
+    max-width: 500px;
+    min-width: 190px;
+    max-height: 420px;
+    min-height: 210px;
     color: "black";
     text-decoration: "none";
     border-radius: 10px;
@@ -49,7 +53,7 @@ const ProductCardWrapper = styled(Link)`
 
       .cardTitle {
         color: black;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         margin: 10px 0;
         padding: 3px;
       }
@@ -62,6 +66,23 @@ const ProductCardWrapper = styled(Link)`
         color: #777373;
         font-weight: 700;
         margin-bottom: 6px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 540px) {
+    max-width: 1000px;
+    min-width: 100%;
+    .card {
+      min-width: 100%;
+      padding: 3px;
+      flex-direction: row;
+      .productImg {
+        height: 100%;
+        width: 50%;
+      }
+      .cardBody {
+        height: 100%;
       }
     }
   }
@@ -87,10 +108,16 @@ function ProductCard({ product, isAdmin }) {
           alt={product.name}
         />
         <div class="cardBody">
-          <h5 class="cardTitle">{product.name}</h5>
+          <h5 class="cardTitle">
+            {product.name.length > 24
+              ? product.name.substr(0, 24) + "..."
+              : product.name}
+          </h5>
 
           <h3 className="cardPrice">₹ {product.price} </h3>
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{ display: "flex", alignItems: "center", flexWrap: "wrap" }}
+          >
             <ReactStars {...options} />
             <span
               style={{

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from "./components/layout/header/Header";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import ProductListing from "./components/Product/ProductListing";
 import ProductDetails from "./components/Product/ProductDetails";
 import MyCart from "./components/user/cart/MyCart";
@@ -25,9 +25,10 @@ import AdminProductDetails from "./components/admin/product/AdminProductDetails"
 
 import { useDispatch } from "react-redux";
 import { loadUser } from "./redux/actions/userAction";
+import LeftSidebar from "./components/layout/leftsidebar/LeftSidebar";
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,6 +41,7 @@ function App() {
         isSidebarOpen={isSidebarOpen}
         setIsSidebarOpen={setIsSidebarOpen}
       />
+      <LeftSidebar isSidebarOpen={isSidebarOpen} />
       <div style={{ marginTop: "90px" }}>
         <Routes>
           <Route path="/" exact element={<Home />} />
@@ -144,6 +146,7 @@ function App() {
         </Routes>
       </div>
     </div>
+    // </div>
   );
 }
 

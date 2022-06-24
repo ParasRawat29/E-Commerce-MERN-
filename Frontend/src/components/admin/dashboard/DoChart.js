@@ -1,14 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import styled from "styled-components";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-];
-
-// const COLORS = ["#8884d8", "orange"];
 const COLORS = ["#79ceca", "#9690ed"];
+
 const ChartWrapper = styled.div`
   width: 40%;
   border-radius: 10px;
@@ -31,6 +27,21 @@ const ChartWrapper = styled.div`
   }
 `;
 function DoChart({ title, aspect }) {
+  const { products, productsCount } = useSelector((state) => state.products);
+
+  const inStock = products.reduce((acc, curr) => {
+    console.log(curr.stock);
+    if (curr.stock >= 0) return acc + 1;
+    else return acc;
+  }, 0);
+
+  const outOfStock = productsCount - inStock;
+
+  const data = [
+    { name: "In Stock", value: inStock },
+    { name: "Out of Stock", value: outOfStock },
+  ];
+
   return (
     <ChartWrapper>
       <div className="title">{title}</div>

@@ -1,14 +1,34 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./scss/ProductComponent.css";
+
 import Loader from "../layout/loader/Loader";
 import { useAlert } from "react-alert";
 import { Pagination } from "@mui/material";
-import { clearErrors } from "../../redux/actions/productAction";
+import { clearErrors, getProducts } from "../../redux/actions/productAction";
 import ProductCard from "./ProductCard";
+import { useParams } from "react-router-dom";
+import actionTypes from "../../redux/constats/actionTypes";
+import styled from "styled-components";
 
-function ProductComponent({ currPage, setCurrPage }) {
+const ProductComponentWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  .productsList {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+    justify-content: space-evenly;
+    min-height: 70vh;
+    gap: 10px;
+  }
+`;
+
+function ProductComponent() {
   const alert = useAlert();
+  const { keyword } = useParams();
   const dispatch = useDispatch();
   let {
     products,
@@ -19,6 +39,10 @@ function ProductComponent({ currPage, setCurrPage }) {
     filteredProductsCount,
   } = useSelector((state) => state.products);
 
+  const { currPage, activeCategory, price, ratings } = useSelector(
+    (state) => state.searchConstraints
+  );
+
   useEffect(() => {
     if (error) {
       alert.error(error);
@@ -26,12 +50,16 @@ function ProductComponent({ currPage, setCurrPage }) {
     }
   }, [alert, error, dispatch]);
 
+  useEffect(() => {
+    dispatch(getProducts(keyword, currPage, activeCategory, price, ratings));
+  }, [dispatch, keyword, currPage, activeCategory, price, ratings]);
+
   return (
-    <div className="productComponentWrapper">
+    <ProductComponentWrapper>
       {isLoading === true ? (
         <Loader />
       ) : (
-        <div style={{ width: "100%" }}>
+        <div style={{ width: "100%", padding: "3px" }}>
           <div className="productsList">
             {products &&
               products.map((product) => {
@@ -51,13 +79,18 @@ function ProductComponent({ currPage, setCurrPage }) {
               <Pagination
                 count={Math.ceil(productsCount / itemsPerPage)}
                 page={currPage}
-                onChange={(e, val) => setCurrPage(val)}
+                onChange={(e, val) => {
+                  dispatch({
+                    type: actionTypes.CHANGE_CURR_PAGE,
+                    payload: val,
+                  });
+                }}
               />
             </div>
           )}
         </div>
       )}
-    </div>
+    </ProductComponentWrapper>
   );
 }
 

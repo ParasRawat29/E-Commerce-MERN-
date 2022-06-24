@@ -156,3 +156,36 @@ export const allAdminProductsReducer = (state = {}, action) => {
       return state;
   }
 };
+
+const seachInitState = {
+  price: [100, 50000],
+  currPage: 1,
+  activeCategory: "home",
+  ratings: 0,
+};
+export const searchConstriantsReducer = (state = seachInitState, action) => {
+  switch (action.type) {
+    case actionTypes.CHANGE_PRICE:
+      return {
+        ...state,
+        price: action.payload,
+      };
+    case actionTypes.CHANGE_CURR_PAGE:
+      return {
+        ...state,
+        currPage: action.payload,
+      };
+    case actionTypes.CHANGE_ACTIVE_CATEGORY:
+      return {
+        ...state,
+        activeCategory: action.payload,
+      };
+    case actionTypes.CHANGE_RATINGS:
+      return {
+        ...state,
+        ratings: action.payload,
+      };
+    default:
+      return state;
+  }
+};

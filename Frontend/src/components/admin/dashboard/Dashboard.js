@@ -9,11 +9,11 @@ const Container = styled.div`
   min-height: 87vh;
   height: max-content;
   position: relative;
-  padding: 10px;
 
   .dashboardWrapper {
     transition: all 0.3s ease-in-out;
     padding: 1rem 0 0 2rem;
+
     .widgetsWrapper {
       display: flex;
       flex: 2;

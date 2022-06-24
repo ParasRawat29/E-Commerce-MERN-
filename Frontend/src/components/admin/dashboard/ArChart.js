@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   AreaChart,
   Area,
@@ -9,15 +10,7 @@ import {
   YAxis,
 } from "recharts";
 import styled from "styled-components";
-
-const data = [
-  { Total: 1200 },
-  { Total: 2100 },
-  { Total: 800 },
-  { Total: 1600 },
-  { Total: 900 },
-  { Total: 1700 },
-];
+import { getAllUsers } from "../../../redux/actions/userAction";
 
 const ChartWrapper = styled.div`
   width: 40%;
@@ -42,8 +35,14 @@ const ChartWrapper = styled.div`
 `;
 
 function ArChart({ title, aspect }) {
-  // const { users } = useSelector((state) => state.allUsers);
+  const dispatch = useDispatch();
+  const usersCount = useSelector((state) => state.allUsers.allUsers)?.length;
 
+  const data = [{ Total: 0 }, { Total: usersCount }];
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  });
   return (
     <ChartWrapper>
       <div className="title">{title}</div>

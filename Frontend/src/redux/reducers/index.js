@@ -12,6 +12,7 @@ import {
   productDetailsReducer,
   productReducer,
   allAdminProductsReducer,
+  searchConstriantsReducer,
 } from "./productReducer";
 import {
   allUsersReducer,
@@ -35,4 +36,5 @@ export const rootReducer = combineReducers({
   allOrders: allOrdersReducer,
   newProduct: newProductReducer,
   allAdminProducts: allAdminProductsReducer,
+  searchConstraints: searchConstriantsReducer,
 });

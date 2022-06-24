@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { getAllUsers } from "../../../redux/actions/userAction";
+import { getAllOrders } from "../../../redux/actions/orderAction";
 
 const WidgetWrapper = styled.div`
   display: flex;
@@ -68,8 +71,11 @@ const WidgetWrapper = styled.div`
 
 function Widget({ type }) {
   let data = {};
+  const dispatch = useDispatch();
   const diff = 4;
   const { productsCount } = useSelector((state) => state.products);
+  const usersCount = useSelector((state) => state.allUsers.allUsers)?.length;
+  const ordersCount = useSelector((state) => state.allOrders.allOrders)?.length;
 
   switch (type) {
     case "users":
@@ -77,6 +83,8 @@ function Widget({ type }) {
         title: "USERS",
         isMoney: false,
         link: "See all users",
+        linkUrl: "/admin/allUsers",
+        amount: usersCount,
         icon: (
           <PersonOutlineIcon
             className="icon"
@@ -93,6 +101,8 @@ function Widget({ type }) {
         title: "ORDERS",
         isMoney: false,
         link: "View all orders",
+        linkUrl: "/admin/allOrders",
+        amount: ordersCount,
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -109,6 +119,7 @@ function Widget({ type }) {
         title: "PRODUCTS",
         isMoney: false,
         link: "View all Products",
+        linkUrl: "/admin/allProducts",
         amount: productsCount,
         icon: (
           <DescriptionOutlinedIcon
@@ -125,6 +136,10 @@ function Widget({ type }) {
       break;
   }
 
+  useEffect(() => {
+    dispatch(getAllUsers());
+    dispatch(getAllOrders());
+  }, [dispatch]);
   return (
     <WidgetWrapper>
       <div className="left">
@@ -132,7 +147,9 @@ function Widget({ type }) {
         <span className="counter">
           {data.isMoney && "$"} {data.amount || 0}
         </span>
-        <span className="link">{data.link}</span>
+        <Link to={data.linkUrl} className="link">
+          {data.link}
+        </Link>
       </div>
       <div className="right">
         <div className="percentage positive">

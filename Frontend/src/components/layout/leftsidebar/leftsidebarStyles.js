@@ -6,9 +6,12 @@ export const LeftsidebarStyles = styled.div`
     height: 100vh;
     max-width: 240px;
     background-color: white;
-    z-index: 1000;
+    z-index: 1000000;
     transition: all 0.5s ease-in-out;
     overflow-y: auto;
+    margin-top: 85px;
+    border-right: 1px solid #c9c7c7;
+    box-shadow: 5px 5px 15px 1px rgba(0, 0, 0, 0.21);
     .categoryWrapper {
       ul {
         list-style-type: none;
@@ -18,11 +21,10 @@ export const LeftsidebarStyles = styled.div`
       li {
         min-width: 100px;
         width: 200px;
-        padding: 4px;
         margin: 1rem 5px;
-        border-radius: 10px;
         cursor: pointer;
         border: 2px solid white;
+        border-radius: 10px;
         &:hover {
           border: 2px solid #ddd8d8;
           cursor: pointer;
@@ -36,9 +38,13 @@ export const LeftsidebarStyles = styled.div`
         outline: none;
         border: none;
         font-size: 1.1rem;
+        padding: 4px;
         cursor: pointer;
         font-weight: inherit;
         background-color: inherit;
+        width: 100%;
+        border-radius: 10px;
+        text-align: left;
         span {
           font-weight: normal;
         }

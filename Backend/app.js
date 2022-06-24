@@ -14,7 +14,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const app = express();
 
 if (process.env.NODE_ENV !== "PRODUCTION") {
-  require("dotenv").dotenv.config();
+  require("dotenv").config();
 }
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,11 +26,11 @@ app.use("/api/v1", userRoutes);
 app.use("/api/v1", orderRoutes);
 app.use("/api/v1", paymentRoutes);
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-console.log(path.join(__dirname, "../frontend/build"));
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-});
+// app.use(express.static(path.join(__dirname, "../frontend/build")));
+// console.log(path.join(__dirname, "../frontend/build"));
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+// });
 
 app.use(errorMiddleware);
 

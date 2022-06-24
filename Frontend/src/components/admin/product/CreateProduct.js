@@ -18,6 +18,7 @@ import {
 } from "../../../redux/actions/productAction";
 import actionTypes from "../../../redux/constats/actionTypes";
 import { useLocation, useNavigate } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 const Container = styled.div`
   position: relative;
@@ -268,18 +269,19 @@ function CreateProduct() {
   const isEdit = location?.state?.isEdit;
   const productDetails = location?.state?.productDetails;
 
-  const { error, success } = useSelector((state) => state.newProduct);
-  console.log(success);
+  const { error, success, isLoading } = useSelector(
+    (state) => state.newProduct
+  );
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [product, setProduct] = useState({
     name: "",
     description: "",
-    price: 0,
-    stock: 0,
+    price: null,
+    stock: null,
   });
 
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreveiw] = useState([]);
+  const [images, setImages] = useState([]); // store images that would sont to db
+  const [imagesPreview, setImagesPreveiw] = useState([]); // to only show at time of preview
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -287,6 +289,7 @@ function CreateProduct() {
       ...product,
       images: [...images],
     };
+
     if (isEdit) {
       dispatch(updateProduct(productDetails._id, data));
     } else {
@@ -330,7 +333,9 @@ function CreateProduct() {
         stock: productDetails.stock,
       }));
       const editImages = productDetails.images.map((image) => image.image_url);
+      console.log("edit images ---------->", editImages);
       setImagesPreveiw(editImages);
+      setImages(editImages);
     }
   }, [isEdit, productDetails]);
 
@@ -340,7 +345,6 @@ function CreateProduct() {
       dispatch(clearErrors());
     }
     if (success) {
-      console.log("fssdlkfjlks");
       if (isEdit) {
         alert.success("Product Updated");
         dispatch({ type: actionTypes.UPDATE_PRODUCT_RESET });
@@ -490,7 +494,11 @@ function CreateProduct() {
                   })}
                 </select>
               </div>
-              <button type="submit">{isEdit ? "Update" : "Create"}</button>
+              {isLoading ? (
+                <CircularProgress />
+              ) : (
+                <button type="submit">{isEdit ? "Update" : "Create"}</button>
+              )}
             </form>
           </div>
         </div>

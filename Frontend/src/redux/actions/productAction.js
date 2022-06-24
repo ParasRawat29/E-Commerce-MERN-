@@ -77,6 +77,7 @@ export const createReview = (review, productId) => async (dispatch) => {
   }
 };
 
+// Create product --ADMIN
 export const createProduct = (prodData) => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.NEW_PRODUCT_REQUEST });
@@ -90,6 +91,7 @@ export const createProduct = (prodData) => async (dispatch) => {
   }
 };
 
+// Delete product --ADMIN
 export const deleteProduct = (prodId) => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.DELETE_PRODUCT_REQUEST });
@@ -106,6 +108,7 @@ export const deleteProduct = (prodId) => async (dispatch) => {
   }
 };
 
+// update product --ADMIN
 export const updateProduct = (prodId, prodData) => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.UPDATE_PRODUCT_REQUEST });

@@ -8,6 +8,7 @@ import femaleDress from "../../../assets/images/femaleDress.webp";
 import femaleTrouser from "../../../assets/images/femaleTrouser.webp";
 import { Link } from "react-router-dom";
 import { mobile, tablet } from "../../../helper";
+
 const GridContainer = styled.a`
   box-sizing: border-box;
   display: grid;

@@ -11,10 +11,10 @@ import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
 
 const Sidebar = styled.div`
   height: 100%;
-  position: absolute;
+  position: fixed;
   border-right: 1px solid lightgray;
-  top: 0;
   left: 0;
+  top: 85px;
   width: 220px;
   background-color: #fdfdfd;
   display: flex;

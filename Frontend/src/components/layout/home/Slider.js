@@ -56,7 +56,7 @@ const Arrow = styled.div`
   &:hover {
     opacity: 1;
   }
-  z-index: 1000000;
+  z-index: 1000;
   ${tablet(`width:30px;height:30px`)}
 `;
 
