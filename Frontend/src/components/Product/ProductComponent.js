@@ -9,6 +9,7 @@ import ProductCard from "./ProductCard";
 import { useParams } from "react-router-dom";
 import actionTypes from "../../redux/constats/actionTypes";
 import styled from "styled-components";
+import { getCategoryName } from "../../helper";
 
 const ProductComponentWrapper = styled.div`
   display: flex;
@@ -63,6 +64,10 @@ function ProductComponent() {
           <div className="productsList">
             {products &&
               products.map((product) => {
+                console.log(
+                  product.category,
+                  getCategoryName(product.category)
+                );
                 return <ProductCard product={product} key={product._id} />;
               })}
           </div>

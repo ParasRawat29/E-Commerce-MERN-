@@ -32,8 +32,8 @@ function LeftSidebar({ isSidebarOpen }) {
         setActiveCategory("electronics");
         navigate("/products");
         break;
-      case "jewelry":
-        setActiveCategory("jewelry");
+      case "jewellery":
+        setActiveCategory("jewellery");
         navigate("/products");
         break;
       case "mensClothing":
@@ -86,7 +86,7 @@ function LeftSidebar({ isSidebarOpen }) {
                 }}
               >
                 <span>🏠 </span>
-                <p>home</p>
+                <p>Home</p>
               </button>
             </li>
             <li
@@ -98,7 +98,7 @@ function LeftSidebar({ isSidebarOpen }) {
                 }}
               >
                 <span>🐛 </span>
-                <p>all</p>
+                <p>All</p>
               </button>
             </li>
             <li
@@ -112,21 +112,21 @@ function LeftSidebar({ isSidebarOpen }) {
                 }}
               >
                 <span>⚡ </span>
-                <p>electronics</p>
+                <p>Electronics</p>
               </button>
             </li>
             <li
               className={`${
-                activeCategory === "jewelry" ? "activeCategory" : ""
+                activeCategory === "jewellery" ? "activeCategory" : ""
               }`}
             >
               <button
                 onClick={() => {
-                  handleCategorySelect("jewelry");
+                  handleCategorySelect("jewellery");
                 }}
               >
                 <span>💎 </span>
-                <p>jewelery</p>
+                <p>Jewellery</p>
               </button>
             </li>
             <li
@@ -140,7 +140,7 @@ function LeftSidebar({ isSidebarOpen }) {
                 }}
               >
                 <span>👕 </span>
-                <p>men's clothing</p>
+                <p>Men's clothing</p>
               </button>
             </li>
             <li
@@ -154,7 +154,7 @@ function LeftSidebar({ isSidebarOpen }) {
                 }}
               >
                 <span>👗 </span>
-                <p>women's clothing</p>
+                <p>Women's clothing</p>
               </button>
             </li>
           </ul>

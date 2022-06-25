@@ -37,11 +37,11 @@ exports.updateProduct = async (req, res, next) => {
   if (!product) {
     return next(new ErrorHandler("Product Not Found", 404));
   }
+  console.log(req.body);
   let images = req.body.images;
   if (images.length > 0) {
     //delte product images from cloudinary
     for (let i = 0; i < product.images.length; i++) {
-      console.log(product.images[i]);
       await cloudinary.v2.uploader.destroy(product.images[i].public_id);
     }
 
@@ -58,7 +58,7 @@ exports.updateProduct = async (req, res, next) => {
         image_url: result.secure_url,
       });
     }
-
+    console.log("here");
     req.body.images = imagesLinks;
   }
 
@@ -100,7 +100,7 @@ exports.getProducts = async (req, res, next) => {
   let filteredProductsCount = products.length;
   apifeature.pagination(ITEM_PER_PAGE);
   products = await apifeature.query.clone();
-  console.log(products);
+
   res.status(201).json({
     success: true,
     products,

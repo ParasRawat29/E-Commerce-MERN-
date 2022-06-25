@@ -2,6 +2,7 @@ import React from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { getCategoryName } from "../../helper";
 
 const ProductCardWrapper = styled(Link)`
   display: flex;
@@ -130,7 +131,9 @@ function ProductCard({ product, isAdmin }) {
               ( {product.numberOfReviews} Reviews )
             </span>
           </div>
-          <small class="cardCategory">{product.category}</small>
+          <small class="cardCategory">
+            {getCategoryName(product.category)}
+          </small>
         </div>
       </div>
     </ProductCardWrapper>

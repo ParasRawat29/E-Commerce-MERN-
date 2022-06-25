@@ -19,6 +19,7 @@ import {
 import actionTypes from "../../../redux/constats/actionTypes";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
+import { getCategoryName } from "../../../helper";
 
 const Container = styled.div`
   position: relative;
@@ -255,10 +256,12 @@ const Container = styled.div`
 `;
 
 const CATEGORY = [
-  "Mens Clothing",
-  "Womens Clothing",
-  "Footwear",
-  "Electronics",
+  "mensClothing",
+  "womensClothing",
+  "electronics",
+  "footwear",
+  "watches",
+  "jewellery",
 ];
 
 function CreateProduct() {
@@ -291,6 +294,7 @@ function CreateProduct() {
     };
 
     if (isEdit) {
+      console.log(data);
       dispatch(updateProduct(productDetails._id, data));
     } else {
       dispatch(createProduct(data));
@@ -345,15 +349,16 @@ function CreateProduct() {
       dispatch(clearErrors());
     }
     if (success) {
+      setProduct({ name: "", description: "", price: 0, stock: 0 });
       if (isEdit) {
         alert.success("Product Updated");
         dispatch({ type: actionTypes.UPDATE_PRODUCT_RESET });
+        navigate(`/admin/product/${productDetails._id}`);
       } else {
         alert.success("Product Added");
         dispatch({ type: actionTypes.NEW_PRODUCT_RESET });
+        navigate("/admin/allProducts");
       }
-      setProduct({ name: "", description: "", price: 0, stock: 0 });
-      navigate("/admin/allProducts");
     }
   }, [alert, dispatch, error, isEdit, navigate, success]);
 
@@ -488,7 +493,7 @@ function CreateProduct() {
                   {CATEGORY.map((cat, idx) => {
                     return (
                       <option value={cat} key={idx}>
-                        {cat}
+                        {getCategoryName(cat)}
                       </option>
                     );
                   })}

@@ -15,3 +15,17 @@ export const mobile = (props) => {
     }
   `;
 };
+
+export const CATEGORY = {
+  home: "Home",
+  all: "All",
+  electronics: "Electronics",
+  mensClothing: "Men's Clothing",
+  womensClothing: "Women's Clothing",
+  watches: "Watches",
+  jewellery: "Jewellery",
+  footwear: "Footwear",
+};
+export const getCategoryName = (category) => {
+  return CATEGORY[category];
+};
