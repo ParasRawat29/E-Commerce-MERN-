@@ -13,6 +13,7 @@ import {
   productReducer,
   allAdminProductsReducer,
   searchConstriantsReducer,
+  productReviewsReducer,
 } from "./productReducer";
 import {
   allUsersReducer,
@@ -24,6 +25,7 @@ import {
 export const rootReducer = combineReducers({
   products: productReducer,
   productDetails: productDetailsReducer,
+  productReviews: productReviewsReducer,
   cart: cartReducer,
   user: userReducer,
   profile: profileReducer,

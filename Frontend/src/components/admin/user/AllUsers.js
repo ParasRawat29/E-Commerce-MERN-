@@ -156,6 +156,10 @@ function AllUsers() {
   };
 
   useEffect(() => {
+    dispatch(getAllUsers());
+  }, []);
+
+  useEffect(() => {
     if (error) {
       alert.error(error);
     }
@@ -166,7 +170,6 @@ function AllUsers() {
       alert.success("user successfully deleted");
       dispatch({ type: actionTypes.DELETE_USER_RESET });
     }
-    dispatch(getAllUsers());
   }, [alert, dispatch, error, isDeleted, profileError]);
 
   return (

@@ -57,6 +57,7 @@ const ProductCardWrapper = styled(Link)`
         font-size: 1.1rem;
         margin: 10px 0;
         padding: 3px;
+        min-height: 48px;
       }
       .cardPrice {
         margin: 0 0 10px 0;

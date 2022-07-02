@@ -7,8 +7,7 @@
 .reviewCard {
   display: flex;
   width: 100%;
-  padding: 3px 0;
-  height: 800px;
+  padding: 10px 0;
 }
 .reviewCard .reviewLeft {
   width: 20%;
@@ -17,20 +16,20 @@
   margin-right: 5px;
 }
 .reviewLeft > .img {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
 }
 .reviewLeft > .img > img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 50%;
 }
 .reviewCard .reviewRight {
   width: 80%;
   padding: 3px 3px 10px 3px;
-  border-bottom: 2px solid rgb(153, 153, 153);
+  border-bottom: 1px solid rgb(203, 201, 201);
 }
 
 .username {
@@ -41,7 +40,12 @@
   color: gray;
   margin-top: 2px;
 }
-
+.comment {
+  font-family: Calibri, "Trebuchet MS", sans-serif;
+  font-size: 1.1rem;
+  padding: 3px 0;
+  font-weight: "normal";
+}
 @media screen and (max-width: 400px) {
   .reviewCard {
     display: flex;

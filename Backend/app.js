@@ -17,7 +17,10 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
   require("dotenv").config();
 }
 app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(
+  bodyParser.urlencoded({ extended: true, limit: "50mb", extended: true })
+);
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());

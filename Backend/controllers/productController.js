@@ -113,7 +113,10 @@ exports.getProducts = async (req, res, next) => {
 // Single product --admin
 exports.getProduct = async (req, res, next) => {
   const prodId = req.params.productId;
-  const product = await Product.findById(prodId);
+  const product = await Product.findById(prodId).populate(
+    "reviews.user",
+    "avatar"
+  );
   if (!product) {
     return next(new ErrorHandler("Product Not Found", 404));
   } else {
@@ -179,7 +182,7 @@ exports.getAllReviews = catchAsyncError(async (req, res, next) => {
   if (!product) {
     return next(new ErrorHandler("Product not found", 404));
   }
-
+  console.log(product.reviews);
   res.status(200).json({
     success: true,
     reviews: product.reviews,

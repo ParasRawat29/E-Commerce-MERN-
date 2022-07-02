@@ -9,12 +9,13 @@ function Review({ review }) {
     isHalf: true,
     size: window.innerWidth < 600 ? 15 : 20,
   };
+  console.log("review ------------------->", review);
   return (
     <div className="reviewCard">
       <div className="reviewLeft">
         <div className="img">
           <img
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.explicit.bing.net%2Fth%3Fid%3DOIP.kZkoTj6isA7ZHIpx5W2HHgHaHa%26pid%3DApi&f=1"
+            src={review.user.avatar.image_url}
             alt="userImg"
             width="50px"
             height="50px"
@@ -24,10 +25,10 @@ function Review({ review }) {
       <div className="reviewRight">
         <div className="userInfo">
           <p className="username">{review.name}</p>
-          <p className="reviewDate">{review.date}fdsdfd</p>
+          <p className="reviewDate">{review.createdAt.substr(0, 10)}</p>
         </div>
         <ReactStars {...options} />
-        <p>{review.comment}</p>
+        <p className="comment">{review.comment}</p>
       </div>
     </div>
   );

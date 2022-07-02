@@ -42,7 +42,7 @@ function ArChart({ title, aspect }) {
 
   useEffect(() => {
     dispatch(getAllUsers());
-  });
+  }, [dispatch]);
   return (
     <ChartWrapper>
       <div className="title">{title}</div>

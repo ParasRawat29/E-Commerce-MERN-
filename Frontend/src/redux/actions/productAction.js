@@ -45,6 +45,10 @@ export const getProductDetails = (id) => async (dispatch) => {
     dispatch({ type: actionTypes.PRODUCT_DETAILS_REQUEST });
     const { data } = await axios.get(`/api/v1/product/${id}`);
     dispatch({ type: actionTypes.PRODUCT_DETAILS_SUCCESS, payload: data });
+    dispatch({
+      type: actionTypes.PRODUCT_REVIEWS_SUCCESS,
+      payload: data.product.reviews,
+    });
   } catch (error) {
     dispatch({
       type: actionTypes.PRODUCT_DETAILS_FAIL,
@@ -59,6 +63,24 @@ const config = {
   },
 };
 
+//get all reviews
+export const getProductReviews = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: actionTypes.PRODUCT_REVIEWS_REQUEST });
+    const { data } = await axios.get(`/api/v1/product/${id}`);
+    dispatch({
+      type: actionTypes.PRODUCT_REVIEWS_SUCCESS,
+      payload: data.product.reviews,
+    });
+  } catch (error) {
+    dispatch({
+      type: actionTypes.PRODUCT_REVIEWS_FAIL,
+      error: error.response.data.message,
+    });
+  }
+};
+
+// submit a review
 export const createReview = (review, productId) => async (dispatch) => {
   try {
     dispatch({ type: actionTypes.NEW_REVIEW_REQUEST });

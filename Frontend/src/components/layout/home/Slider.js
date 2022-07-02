@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import leftArrow from "../../../assets/icons/left-arrow.svg";
 import rightArrow from "../../../assets/icons/right-arrow.svg";
@@ -145,6 +146,8 @@ const Dot = styled.div`
   ${tablet(`height:7px;width:${(props) => (props.isActive ? "10px" : "7px")}`)}
 `;
 function Slider() {
+  const navigate = useNavigate();
+
   const [activeSlideno, setActiveSlideNo] = useState(1);
 
   const handleArrowClick = (direction) => {
@@ -185,7 +188,12 @@ function Slider() {
               <AboutContainer>
                 <div className="title">{slide.title}</div>
                 <div className="description">{slide.description}</div>
-                <button className="shopBtn">Shop Here</button>
+                <button
+                  className="shopBtn"
+                  onClick={() => navigate("/products")}
+                >
+                  Shop Here
+                </button>
               </AboutContainer>
             </Slide>
           );

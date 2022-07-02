@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllUsers } from "../../../redux/actions/userAction";
 import { getAllOrders } from "../../../redux/actions/orderAction";
+import { getProducts } from "../../../redux/actions/productAction";
 
 const WidgetWrapper = styled.div`
   display: flex;
@@ -139,6 +140,7 @@ function Widget({ type }) {
   useEffect(() => {
     dispatch(getAllUsers());
     dispatch(getAllOrders());
+    dispatch(getProducts());
   }, [dispatch]);
   return (
     <WidgetWrapper>

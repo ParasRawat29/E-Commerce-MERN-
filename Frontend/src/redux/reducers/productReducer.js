@@ -39,12 +39,33 @@ export const productDetailsReducer = (state = {}, action) => {
         isLoading: false,
         product: action.payload.product,
       };
+
     case actionTypes.ALL_PRODUCTS_FAIL:
       return { isLoading: false, error: action.error };
 
     case actionTypes.CLEAR_ERRORS:
       return { ...state, error: null };
 
+    default:
+      return state;
+  }
+};
+export const productReviewsReducer = (state = { reviews: [] }, action) => {
+  switch (action.type) {
+    case actionTypes.PRODUCT_REVIEWS_REQUEST:
+      return { isLoading: true, reviews: [] };
+
+    case actionTypes.PRODUCT_REVIEWS_SUCCESS:
+      return {
+        isLoading: false,
+        reviews: action.payload,
+      };
+
+    case actionTypes.ALL_PRODUCTS_FAIL:
+      return { isLoading: false, error: action.error };
+
+    case actionTypes.CLEAR_ERRORS:
+      return { ...state, error: null };
     default:
       return state;
   }

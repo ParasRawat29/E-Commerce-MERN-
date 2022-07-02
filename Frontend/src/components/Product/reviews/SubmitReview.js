@@ -7,6 +7,7 @@ import {
   clearErrors,
   createReview,
   getProductDetails,
+  getProductReviews,
 } from "../../../redux/actions/productAction";
 import actionTypes from "../../../redux/constats/actionTypes";
 
@@ -66,7 +67,6 @@ function SubmitReview({ productId }) {
   const { success, error } = useSelector((state) => state.newReview);
   const dispatch = useDispatch();
   const alert = useAlert();
-
   const handleRating = (val) => {
     setReview((pre) => {
       return {
@@ -101,8 +101,8 @@ function SubmitReview({ productId }) {
     }
     if (success) {
       alert.success("review submitted");
+      dispatch(getProductReviews(productId));
       dispatch({ type: actionTypes.NEW_REVIEW_RESET });
-      dispatch(getProductDetails(productId));
     }
   }, [alert, dispatch, error, success]);
   return (
@@ -114,6 +114,7 @@ function SubmitReview({ productId }) {
         placeholder="Submit review"
         onChange={handleTextChange}
         onClick={handleTextChange}
+        required
       />
 
       {active ? (

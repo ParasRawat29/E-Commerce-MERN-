@@ -64,10 +64,6 @@ function ProductComponent() {
           <div className="productsList">
             {products &&
               products.map((product) => {
-                console.log(
-                  product.category,
-                  getCategoryName(product.category)
-                );
                 return <ProductCard product={product} key={product._id} />;
               })}
           </div>

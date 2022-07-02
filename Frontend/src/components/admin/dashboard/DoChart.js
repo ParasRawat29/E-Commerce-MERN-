@@ -30,7 +30,6 @@ function DoChart({ title, aspect }) {
   const { products, productsCount } = useSelector((state) => state.products);
 
   const inStock = products.reduce((acc, curr) => {
-    console.log(curr.stock);
     if (curr.stock >= 0) return acc + 1;
     else return acc;
   }, 0);

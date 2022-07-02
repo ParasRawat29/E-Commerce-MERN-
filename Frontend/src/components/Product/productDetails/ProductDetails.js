@@ -2,21 +2,19 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteProduct,
   getProductDetails,
-} from "../../redux/actions/productAction";
-import { addItemToCart, setCart } from "../../redux/actions/cartAction";
+  getProductReviews,
+} from "../../../redux/actions/productAction";
+import { addItemToCart } from "../../../redux/actions/cartAction";
 import styled from "styled-components";
 import ReactStars from "react-rating-stars-component";
-import Review from "./reviews/Review";
-import MetaData from "../MetaData";
-import { useNavigate, useLocation } from "react-router-dom";
+import MetaData from "../../MetaData";
+import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
-import SubmitReview from "./reviews/SubmitReview";
-import DeleteOutlineTwoToneIcon from "@mui/icons-material/DeleteOutlineTwoTone";
-import EditTwoToneIcon from "@mui/icons-material/EditTwoTone";
-import actionTypes from "../../redux/constats/actionTypes";
-import { CircularProgress } from "@mui/material";
+import SubmitReview from "../reviews/SubmitReview";
+
+import actionTypes from "../../../redux/constats/actionTypes";
+import AllReviews from "../reviews/AllReviews";
 
 // STYLING FOR THIS COMPONENT
 const Container = styled.div`
@@ -29,80 +27,82 @@ const Container = styled.div`
   flex-direction: row;
   padding: 1rem;
   justify-content: space-evenly;
+  .leftWrapper {
+    width: 50%;
+    max-width: 600px;
+    min-width: 300px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
+
+    .imageWrapper {
+      position: fixed;
+      padding: 10px 5px;
+      .CarouselImage {
+        width: 100%;
+        /* min-height: 320px; */
+        max-height: 500px;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    .buttonsWrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-top: 10px;
+      button {
+        width: 40%;
+        font-size: 1.1rem;
+        padding: 5px 10px;
+        border-radius: 4px;
+        background-color: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:active {
+          transform: scale(0.96);
+        }
+      }
+      .editBtn {
+        color: purple;
+        border: 2px solid purple;
+        &:hover {
+          background-color: #9b269b;
+          color: white;
+        }
+      }
+      .deleteBtn {
+        color: indianred;
+        border: 2px solid indianred;
+        &:hover {
+          background-color: indianred;
+          color: white;
+        }
+      }
+    }
+    @media screen and (max-width: 800px) {
+      width: fit-content;
+      justify-content: center;
+      height: auto;
+      padding: 0;
+      .imageWrapper {
+        position: static;
+        img {
+          min-height: fit-content;
+        }
+      }
+    }
+  }
   @media screen and (max-width: 800px) {
     flex-direction: column;
     padding: 0;
     align-items: center;
-  }
-`;
-const LeftWrapper = styled.div`
-  width: 60%;
-  max-width: 600px;
-  min-width: 300px;
-  padding: 0.5rem;
-  height: auto;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  align-items: center;
-  /* background-color: olive; */
-  .imageWrapper {
-    /* background-color: lightblue; */
-    padding: 10px 5px;
-    .CarouselImage {
-      width: 100%;
-      /* min-height: 320px; */
-      max-height: 500px;
-      height: 100%;
-      object-fit: contain;
-    }
-  }
-  .buttonsWrapper {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 10px;
-    button {
-      width: 40%;
-      font-size: 1.1rem;
-      padding: 5px 10px;
-      border-radius: 4px;
-      background-color: inherit;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &:active {
-        transform: scale(0.96);
-      }
-    }
-    .editBtn {
-      color: purple;
-      border: 2px solid purple;
-      &:hover {
-        background-color: #9b269b;
-        color: white;
-      }
-    }
-    .deleteBtn {
-      color: indianred;
-      border: 2px solid indianred;
-      &:hover {
-        background-color: indianred;
-        color: white;
-      }
-    }
-  }
-  @media screen and (max-width: 800px) {
-    width: fit-content;
-    justify-content: center;
-    height: auto;
-    padding: 0;
-    img {
-      min-height: fit-content;
-    }
   }
 `;
 const RightWrapper = styled.div`
@@ -118,6 +118,9 @@ const RightWrapper = styled.div`
 const Title = styled.h1`
   font: 2rem "Urbanist";
   display: block;
+  @media screen and (max-width: 800px) {
+    font: 1.5rem "Urbanist";
+  }
 `;
 
 const Description = styled.p`
@@ -262,11 +265,6 @@ function ProductDetails() {
     }
   };
 
-  const handleDeleteProduct = () => {
-    dispatch(deleteProduct(productId));
-  };
-  const handleEditProduct = () => {};
-
   useEffect(() => {
     if (isDeleted) {
       alert.success("product Deleted");
@@ -274,6 +272,7 @@ function ProductDetails() {
       navigate("/admin/allProducts");
     }
     dispatch(getProductDetails(productId));
+    dispatch(getProductReviews(productId));
   }, [dispatch, productId, isDeleted, alert, navigate]);
 
   useEffect(() => {
@@ -301,7 +300,7 @@ function ProductDetails() {
           {product && (
             <Container>
               <MetaData title={`${product.name}__ECOM`} />
-              <LeftWrapper>
+              <div className="leftWrapper">
                 <div className="imageWrapper">
                   <img
                     src={product?.images[0]?.image_url}
@@ -309,7 +308,8 @@ function ProductDetails() {
                     alt={`slide`}
                   />
                 </div>
-              </LeftWrapper>
+              </div>
+
               <RightWrapper>
                 <Title>{product.name}</Title>
                 <Description>{product.description}</Description>
@@ -390,11 +390,7 @@ function ProductDetails() {
                 {product && product.reviews.length <= 0 ? (
                   <h3>No reviews</h3>
                 ) : (
-                  <>
-                    {product.reviews.map((review) => (
-                      <Review review={review} />
-                    ))}
-                  </>
+                  <AllReviews />
                 )}
               </RightWrapper>
             </Container>
