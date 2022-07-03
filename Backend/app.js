@@ -18,10 +18,10 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 }
 app.use(cors());
 app.use(
-  bodyParser.urlencoded({ extended: true, limit: "50mb", extended: true })
+  bodyParser.urlencoded({ extended: true, limit: "500mb", extended: true })
 );
 
-app.use(express.json());
+app.use(express.json({ limit: "500mb" }));
 app.use(cookieParser());
 app.use(fileUpload());
 app.use("/api/v1", productRoutes);

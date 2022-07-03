@@ -112,12 +112,12 @@ function Shipping() {
   const { shippingInfo } = useSelector((state) => state.cart);
 
   const [address, setAddress] = useState({
-    address: null,
-    city: null,
-    state: null,
-    country: null,
-    pincode: null,
-    phoneNumber: null,
+    address: "",
+    city: "",
+    state: "",
+    country: "",
+    pincode: "",
+    phoneNumber: "",
   });
 
   const handleInputChange = (e) => {
@@ -144,17 +144,21 @@ function Shipping() {
   };
 
   useEffect(() => {
-    setAddress(() => {
-      return {
-        address: shippingInfo.address,
-        city: shippingInfo.city,
-        state: shippingInfo.state,
-        country: shippingInfo.country,
-        pincode: shippingInfo.pincode,
-        phoneNumber: shippingInfo.phoneNo,
-      };
-    });
+    if (shippingInfo) {
+      setAddress(() => {
+        return {
+          address: shippingInfo.address,
+          city: shippingInfo.city,
+          state: shippingInfo.state,
+          country: shippingInfo.country,
+          pincode: shippingInfo.pincode,
+          phoneNumber: shippingInfo.phoneNo,
+        };
+      });
+    }
   }, [shippingInfo]);
+
+  console.log(shippingInfo);
   return (
     <>
       <MetaData title="Shipping Details" />
@@ -204,8 +208,8 @@ function Shipping() {
                 name="phoneNumber"
                 onChange={handleInputChange}
                 value={address.phoneNumber}
-                required
                 size="10"
+                required
               />
               <label>Phone No.</label>
             </div>

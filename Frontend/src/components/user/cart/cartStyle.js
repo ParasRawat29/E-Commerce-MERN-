@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const CartWrapper = styled.div`
   padding: 10px;
   width: 100%;
@@ -6,6 +7,7 @@ export const CartWrapper = styled.div`
   font-family: "Readex Pro", sans-serif;
   box-sizing: border-box;
   background: "#fcfcfc";
+  /* background-color: lightblue; */
   & > h4 {
     font-size: 1.2rem;
     margin: 10px 0;
@@ -39,13 +41,13 @@ export const CartWrapper = styled.div`
       flex-grow: 1;
       padding: 10px;
       margin: 5px 0;
-      height: fit-content;
+      height: max-content;
       /* background-color: aqua; */
       max-height: 175px;
       -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
       box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
       img {
-        width: 30%;
+        width: 25%;
         height: auto;
         max-width: 300px;
         min-width: 150px;
@@ -62,16 +64,17 @@ export const CartWrapper = styled.div`
           padding: 5px;
           width: 40%;
           min-width: 80px;
+          margin-left: 15px;
           .cardTitle {
             /* background-color: aqua; */
-            font-size: 1.5rem;
-            text-align: center;
+            font-size: 1.4rem;
+            text-align: left;
             margin: 10px 0 20px 0;
           }
           .productPrice {
             margin: 10px 0;
-            text-align: center;
-            font-size: 1.3rem;
+            text-align: left;
+            font-size: 1.2rem;
             color: gray;
           }
         }
@@ -187,21 +190,34 @@ export const CartWrapper = styled.div`
     .ProductsWrapper {
       flex-direction: column;
       .productCard {
-        max-height: 185px;
+        height: max-content;
+        max-height: 230px;
         img {
           width: 50%;
           min-width: 125px;
         }
         .card {
           flex-direction: column;
-          justify-content: center;
+          justify-content: space-evenly;
           align-items: center;
-          .productDes,
+          .productDes {
+            .cardTitle {
+              font-size: min(5vw, 1.1rem);
+            }
+          }
           .quantityContainer,
-          .removeBtn {
+          .removeBtn,
+          .productDes {
             width: 90%;
             text-align: center;
             padding: 5px 0;
+          }
+
+          .removeBtn {
+            height: 40px;
+          }
+          .quantityContainer {
+            justify-content: left;
           }
         }
       }
@@ -211,6 +227,30 @@ export const CartWrapper = styled.div`
       margin: 1rem 0 2rem 0;
       .totalAmtContainer {
         width: 100%;
+      }
+    }
+  }
+
+  @media screen and (max-width: 550px) {
+    .ProductsWrapper {
+      .productCard {
+        .card {
+          .productDes {
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 350px) {
+    .ProductsWrapper {
+      .productCard {
+        .card {
+          .quantityContainer {
+            label {
+              display: none;
+            }
+          }
+        }
       }
     }
   }

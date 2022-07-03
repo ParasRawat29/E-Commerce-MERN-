@@ -15,39 +15,26 @@ import SubmitReview from "../reviews/SubmitReview";
 
 import actionTypes from "../../../redux/constats/actionTypes";
 import AllReviews from "../reviews/AllReviews";
+import ProductImages from "./ProductImages";
 
 // STYLING FOR THIS COMPONENT
 const Container = styled.div`
   box-sizing: border-box;
-
   font-family: "Urbanist";
   width: 100%;
-
   display: flex;
   flex-direction: row;
   padding: 1rem;
   justify-content: space-evenly;
   .leftWrapper {
-    width: 50%;
+    width: 40%;
     max-width: 600px;
     min-width: 300px;
     padding: 0.5rem;
     display: flex;
-    align-items: flex-start;
     flex-direction: column;
-    align-items: center;
-
-    .imageWrapper {
-      position: fixed;
-      padding: 10px 5px;
-      .CarouselImage {
-        width: 100%;
-        /* min-height: 320px; */
-        max-height: 500px;
-        height: 100%;
-        object-fit: contain;
-      }
-    }
+    align-items: flex-start;
+    /* background-color: lightgreen; */
     .buttonsWrapper {
       width: 100%;
       display: flex;
@@ -86,20 +73,14 @@ const Container = styled.div`
         }
       }
     }
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 870px) {
       width: fit-content;
       justify-content: center;
       height: auto;
       padding: 0;
-      .imageWrapper {
-        position: static;
-        img {
-          min-height: fit-content;
-        }
-      }
     }
   }
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 870px) {
     flex-direction: column;
     padding: 0;
     align-items: center;
@@ -108,8 +89,9 @@ const Container = styled.div`
 const RightWrapper = styled.div`
   padding: 2rem 0rem;
   /* display: flex; */
-  width: 40%;
-  @media screen and (max-width: 800px) {
+  width: 50%;
+  max-width: 600px;
+  @media screen and (max-width: 870px) {
     width: 100%;
     justify-content: center;
     padding: 1rem;
@@ -118,14 +100,13 @@ const RightWrapper = styled.div`
 const Title = styled.h1`
   font: 2rem "Urbanist";
   display: block;
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 870px) {
     font: 1.5rem "Urbanist";
   }
 `;
 
 const Description = styled.p`
   font: 1.1rem Helvetica;
-  /* background-color: lightcoral; */
   margin: 1rem;
 `;
 
@@ -301,13 +282,7 @@ function ProductDetails() {
             <Container>
               <MetaData title={`${product.name}__ECOM`} />
               <div className="leftWrapper">
-                <div className="imageWrapper">
-                  <img
-                    src={product?.images[0]?.image_url}
-                    className="CarouselImage"
-                    alt={`slide`}
-                  />
-                </div>
+                <ProductImages product={product} />
               </div>
 
               <RightWrapper>

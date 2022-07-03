@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Dashboard from "../admin/dashboard/Dashboard";
 import AllOrders from "../admin/order/AllOrders";
 import OrderDetailsAdmin from "../admin/order/OrderDetailsAdmin";

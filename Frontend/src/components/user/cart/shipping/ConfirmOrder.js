@@ -21,7 +21,7 @@ const Container = styled.div`
       width: 100%;
       max-width: 500px;
       height: min-content;
-      padding: 3px;
+      padding: 3px 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -75,7 +75,8 @@ const Container = styled.div`
       }
     }
   }
-  @media screen and (max-width: 670px) {
+
+  @media screen and (max-width: 770px) {
     flex-direction: column-reverse;
     .left,
     .right {
@@ -85,7 +86,7 @@ const Container = styled.div`
     }
     .left {
       .shipingInfoWrapper {
-        width: 100%;
+        /* width: 100%; */
       }
       .cartWrapper {
         width: 100%;

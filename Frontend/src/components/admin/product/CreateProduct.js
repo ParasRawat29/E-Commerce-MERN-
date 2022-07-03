@@ -99,12 +99,12 @@ const Container = styled.div`
             align-items: center;
             margin: 0.7rem 0;
             position: relative;
-            padding: 0 10px;
+            padding: 0 5px;
             input {
               height: 100%;
               width: 90%;
               font-size: 1.4rem;
-              padding: 5px 15px;
+              padding: 5px 4px;
               outline: none;
               border: none;
               background: transparent;
@@ -209,6 +209,14 @@ const Container = styled.div`
         .left,
         .right {
           width: 100%;
+        }
+        form {
+          .categoryWrapper {
+            width: 100%;
+            select {
+              width: 100%;
+            }
+          }
         }
       }
     }
@@ -353,11 +361,11 @@ function CreateProduct() {
       if (isEdit) {
         alert.success("Product Updated");
         dispatch({ type: actionTypes.UPDATE_PRODUCT_RESET });
-        navigate(`/admin/product/${productDetails._id}`);
+        navigate(`/admin/product/${productDetails._id}`, { replace: true });
       } else {
         alert.success("Product Added");
         dispatch({ type: actionTypes.NEW_PRODUCT_RESET });
-        navigate("/admin/allProducts");
+        navigate("/admin/allProducts", { repalce: true });
       }
     }
   }, [alert, dispatch, error, isEdit, navigate, success]);
@@ -435,7 +443,7 @@ function CreateProduct() {
             <form onSubmit={handleSubmit}>
               <div className="inputGroup">
                 <AbcIcon />
-                <input
+                <textarea
                   name="name"
                   type="text"
                   required

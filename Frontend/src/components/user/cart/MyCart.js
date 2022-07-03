@@ -103,7 +103,7 @@ function MyCart() {
             <div className="totalAmtContainer">
               <div className="totalDes">
                 <h5 className="totalItem">Total Items: {cartItems.length}</h5>
-                <h3 className="totalAmt amount">$ {totalAmt}</h3>
+                <h3 className="totalAmt amount">₹ {totalAmt}</h3>
               </div>
               <div className="checkoutWrapper">
                 <button
