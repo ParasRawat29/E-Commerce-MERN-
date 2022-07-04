@@ -2,7 +2,7 @@ import actionTypes from "../constats/actionTypes";
 
 export const newOrderReducer = (state = {}, action) => {
   switch (action.type) {
-    case actionTypes.CREATE_ORDER_REQUEST:
+    case actionTypes.CREATE_ORDER:
       return {
         ...state,
         isLoading: true,

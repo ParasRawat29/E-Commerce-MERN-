@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const cloudinary = require("cloudinary");
+
 const app = require("./app");
 const dotenv = require("dotenv");
 
@@ -20,6 +21,7 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
     api_secret: process.env.API_SECRET,
   });
   console.log("database connected");
+
   server = app.listen(process.env.PORT || "5000", () => {
     console.log(`server running at port ${process.env.PORT}`);
   });

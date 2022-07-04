@@ -39,12 +39,8 @@ function CheckOutSteps({ activeStep }) {
       icon: <LocalShippingIcon />,
     },
     {
-      label: <Typography>Confirm Order</Typography>,
+      label: <Typography>Confirm Order and Payment</Typography>,
       icon: <LibraryAddCheckIcon />,
-    },
-    {
-      label: <Typography>Payment</Typography>,
-      icon: <PaymentIcon />,
     },
   ];
 

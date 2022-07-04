@@ -1,10 +1,12 @@
 import React from "react";
 import MetaData from "../../../MetaData";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CheckOutSteps from "./CheckOutSteps";
-import { useNavigate } from "react-router-dom";
+
 import ConfirmOrderDetails from "./ConfirmOrderDetails";
+import { checkoutHandler } from "./logic";
+import actionTypes from "../../../../redux/constats/actionTypes";
 
 // styles for this container
 const Container = styled.div`
@@ -119,9 +121,9 @@ const Container = styled.div`
 `;
 
 function ConfirmOrder() {
-  const navigate = useNavigate();
   const { user, isLoading } = useSelector((state) => state.user);
   const { shippingInfo, cartItems } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const totalCartPrice = cartItems.reduce((acc, curr) => {
     return acc + curr.price * curr.quantity;
@@ -139,7 +141,7 @@ function ConfirmOrder() {
       totalAmt,
     };
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
-    navigate("/process/payment");
+    checkoutHandler(totalAmt, user, shippingInfo);
   };
 
   return (
@@ -183,7 +185,7 @@ function ConfirmOrder() {
                       <h3>{totalAmt}</h3>
                     </div>
                     <button className="paymentBtn" onClick={proceedToPayment}>
-                      Payment
+                      <>Pay ${totalAmt}</>
                     </button>
                   </div>
                 </section>

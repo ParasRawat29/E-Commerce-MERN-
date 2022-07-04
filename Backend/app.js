@@ -24,6 +24,7 @@ app.use(
 app.use(express.json({ limit: "500mb" }));
 app.use(cookieParser());
 app.use(fileUpload());
+
 app.use("/api/v1", productRoutes);
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", orderRoutes);
