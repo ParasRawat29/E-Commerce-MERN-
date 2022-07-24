@@ -1,7 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from "recharts";
 import styled from "styled-components";
+import { getAdminProducts } from "../../../redux/actions/productAction";
 
 const COLORS = ["#79ceca", "#9690ed"];
 
@@ -27,19 +28,29 @@ const ChartWrapper = styled.div`
   }
 `;
 function DoChart({ title, aspect }) {
-  const { products, productsCount } = useSelector((state) => state.products);
-
-  const inStock = products.reduce((acc, curr) => {
-    if (curr.stock >= 0) return acc + 1;
-    else return acc;
-  }, 0);
-
-  const outOfStock = productsCount - inStock;
+  const { products } = useSelector((state) => state.allAdminProducts);
+  const dispatch = useDispatch();
+  const [inStock, setInStock] = useState(0);
 
   const data = [
     { name: "In Stock", value: inStock },
-    { name: "Out of Stock", value: outOfStock },
+    { name: "Out of Stock", value: products?.length - inStock },
   ];
+
+  useEffect(() => {
+    if (products && products?.length) {
+      let inStock = 0;
+      products.forEach((pro) => {
+        console.log(pro);
+        if (pro.stock > 0) inStock++;
+      });
+      setInStock(inStock);
+    }
+  }, [products]);
+
+  useEffect(() => {
+    dispatch(getAdminProducts());
+  }, []);
 
   return (
     <ChartWrapper>
