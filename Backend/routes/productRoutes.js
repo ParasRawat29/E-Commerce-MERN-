@@ -45,7 +45,7 @@ router.delete(
 router.put("/review/new", isAuthenticatedUser, createProductReview);
 router.get("/reviews", isAuthenticatedUser, getAllReviews);
 router.delete(
-  "/delete",
+  "/review/delete",
   isAuthenticatedUser,
   AuthorizeRole("admin"),
   deleteReview

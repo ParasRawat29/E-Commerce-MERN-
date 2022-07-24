@@ -9,7 +9,6 @@ import ProductCard from "./ProductCard";
 import { useParams } from "react-router-dom";
 import actionTypes from "../../redux/constats/actionTypes";
 import styled from "styled-components";
-import { getCategoryName } from "../../helper";
 
 const ProductComponentWrapper = styled.div`
   display: flex;

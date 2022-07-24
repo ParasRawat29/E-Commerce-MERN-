@@ -213,12 +213,7 @@ function AdminProductDetails() {
                   </span>
                 </div>
                 <div style={{ margin: "2rem 0 ", fontSize: "1.2rem" }}>
-                  Staus :{" "}
-                  {product.stock > 0 ? (
-                    <span style={{ color: "green" }}>In Stock</span>
-                  ) : (
-                    <span style={{ color: "indianred" }}>Out of Stock</span>
-                  )}
+                  Stock : {product.stock}
                 </div>
                 <div className="buttonsWrapper">
                   {adminLoading ? (
@@ -253,7 +248,7 @@ function AdminProductDetails() {
                 ) : (
                   <>
                     {product.reviews.map((review) => (
-                      <Review review={review} />
+                      <Review review={review} isAdmin={true} />
                     ))}
                   </>
                 )}

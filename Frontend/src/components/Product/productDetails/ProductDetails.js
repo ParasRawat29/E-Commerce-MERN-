@@ -1,10 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getProductDetails,
-  getProductReviews,
-} from "../../../redux/actions/productAction";
+import { getProductDetails } from "../../../redux/actions/productAction";
 import { addItemToCart } from "../../../redux/actions/cartAction";
 import styled from "styled-components";
 import ReactStars from "react-rating-stars-component";
@@ -253,7 +250,6 @@ function ProductDetails() {
       navigate("/admin/allProducts");
     }
     dispatch(getProductDetails(productId));
-    dispatch(getProductReviews(productId));
   }, [dispatch, productId, isDeleted, alert, navigate]);
 
   useEffect(() => {
@@ -299,17 +295,6 @@ function ProductDetails() {
                     <FilterColor color="gray" />
                     <FilterColor color="yellow" />
                     <FilterColor color="black" />
-                  </Filter>
-                  <Filter>
-                    <FilterTitle>Size: </FilterTitle>
-                    <FilterSize>
-                      <FilterSizeOption>XS</FilterSizeOption>
-                      <FilterSizeOption>S</FilterSizeOption>
-                      <FilterSizeOption>M</FilterSizeOption>
-                      <FilterSizeOption>L</FilterSizeOption>
-                      <FilterSizeOption>XL</FilterSizeOption>
-                      <FilterSizeOption>XXL</FilterSizeOption>
-                    </FilterSize>
                   </Filter>
                 </FilterContainer>
                 <QuantityWrapper>
