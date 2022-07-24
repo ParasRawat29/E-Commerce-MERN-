@@ -40,20 +40,16 @@ exports.updateProduct = async (req, res, next) => {
 
   let images = req.body.images;
   if (images.length > 0) {
-    //delte product images from cloudinary
-    for (let i = 0; i < product.images.length; i++) {
-      console.log(product.images[i].public_id);
-      await cloudinary.v2.uploader.destroy(product.images[i].public_id);
-    }
-
+    //delete product images from cloudinary
     const imagesLinks = []; // for database
 
     // upload new photos to cloudinary
     for (let i = 0; i < images.length; i++) {
+      console.log("images ", images[i]);
       const result = await cloudinary.v2.uploader.upload(images[i], {
         folder: "products",
       });
-
+      console.log("result--->", result);
       imagesLinks.push({
         public_id: result.public_id,
         image_url: result.secure_url,
@@ -192,6 +188,7 @@ exports.getAllReviews = catchAsyncError(async (req, res, next) => {
 
 // delete review
 exports.deleteReview = catchAsyncError(async (req, res, next) => {
+  console.log(req.query);
   const product = await Product.findById(req.query.productId);
 
   if (!product) {
