@@ -8,6 +8,7 @@
   display: flex;
   width: 100%;
   padding: 10px 0;
+  margin: 10px 0;
 }
 .reviewCard .reviewLeft {
   width: 20%;
@@ -27,6 +28,7 @@
   border-radius: 50%;
 }
 .reviewCard .reviewRight {
+  position: relative;
   width: 80%;
   padding: 3px 3px 10px 3px;
   border-bottom: 1px solid rgb(203, 201, 201);

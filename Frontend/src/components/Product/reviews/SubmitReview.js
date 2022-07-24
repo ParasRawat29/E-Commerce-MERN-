@@ -101,10 +101,11 @@ function SubmitReview({ productId }) {
     }
     if (success) {
       alert.success("review submitted");
-      dispatch(getProductReviews(productId));
       dispatch({ type: actionTypes.NEW_REVIEW_RESET });
+      // dispatch(getProductReviews(productId));
+      dispatch(getProductDetails(productId));
     }
-  }, [alert, dispatch, error, success]);
+  }, [alert, dispatch, error, productId, success]);
   return (
     <Form onSubmit={handleReviewSubmit}>
       <textarea

@@ -8,7 +8,7 @@ import {
 } from "./orderReducer";
 import {
   newProductReducer,
-  newReviewReducer,
+  ReviewReducer,
   productDetailsReducer,
   productReducer,
   allAdminProductsReducer,
@@ -32,7 +32,7 @@ export const rootReducer = combineReducers({
   newOrder: newOrderReducer,
   myOrders: myOrderReducer,
   orderDetails: orderDetailsReducer,
-  newReview: newReviewReducer,
+  newReview: ReviewReducer,
   allUsers: allUsersReducer,
   userDetails: userDetailReducer,
   allOrders: allOrdersReducer,

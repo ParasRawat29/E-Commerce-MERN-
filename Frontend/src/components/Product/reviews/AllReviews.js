@@ -20,7 +20,7 @@ function AllReviews() {
           <CircularProgress color="secondary" size={60} />
         </div>
       ) : (
-        reviews.map((review) => <Review review={review} />)
+        reviews.map((review) => <Review review={review} isAdmin={false} />)
       )}
     </>
   );
