@@ -34,7 +34,7 @@ console.log(path.join(__dirname, "../Frontend/build"));
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../Frontend/build/index.html"));
 });
-
+/*********************************************************************** */
 app.use(errorMiddleware);
 
 module.exports = app;
