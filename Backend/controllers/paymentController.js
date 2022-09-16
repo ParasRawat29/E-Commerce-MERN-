@@ -6,7 +6,7 @@ const {
   validatePaymentVerification,
 } = require("razorpay/dist/utils/razorpay-utils");
 
-dotenv.config();
+dotenv.config({ path: __dirname + "/../.env" });
 
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_API_KEY,

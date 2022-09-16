@@ -13,9 +13,7 @@ const orderRoutes = require("./routes/orderRoutes");
 //CONFIG
 const app = express();
 
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  require("dotenv").config();
-}
+require("dotenv").config();
 app.use(cors());
 app.use(
   bodyParser.urlencoded({ extended: true, limit: "500mb", extended: true })
