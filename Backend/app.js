@@ -28,10 +28,11 @@ app.use("/api/v1", userRoutes);
 app.use("/api/v1", orderRoutes);
 app.use("/api/v1", paymentRoutes);
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-console.log(path.join(__dirname, "../frontend/build"));
+/**************          DEPLOY          ************************ */
+app.use(express.static(path.join(__dirname, "../Frontend/build")));
+console.log(path.join(__dirname, "../Frontend/build"));
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+  res.sendFile(path.resolve(__dirname, "../Frontend/build/index.html"));
 });
 
 app.use(errorMiddleware);
