@@ -1,17 +1,23 @@
-import React from "react";
-import MetaData from "../../MetaData";
-import Footer from "./Footer";
-import GridListing from "./GridListing";
+import React, { Suspense, lazy } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "../../ErrorBoundary";
+const MetaData = lazy(() => import("../../MetaData"));
+const Footer = lazy(() => import("./Footer"));
+const GridListing = lazy(() => import("./GridListing"));
 
-import Slider from "./Slider";
+const Slider = lazy(() => import("./Slider"));
 
 function Home() {
   return (
     <div>
-      <MetaData title="Ecommerce" />
-      <Slider />
-      <GridListing />
-      <Footer />
+      <ErrorBoundary FallbackComponenet={ErrorFallback} onReset={() => {}}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <MetaData title="Ecommerce" />
+          <Slider />
+          <GridListing />
+          <Footer />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 }

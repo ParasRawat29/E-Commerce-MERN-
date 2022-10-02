@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductDetails } from "../../../redux/actions/productAction";
@@ -8,11 +8,11 @@ import ReactStars from "react-rating-stars-component";
 import MetaData from "../../MetaData";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
-import SubmitReview from "../reviews/SubmitReview";
-
 import actionTypes from "../../../redux/constats/actionTypes";
-import AllReviews from "../reviews/AllReviews";
-import ProductImages from "./ProductImages";
+import { lazy } from "react";
+const SubmitReview = lazy(() => import("../reviews/SubmitReview"));
+const AllReviews = lazy(() => import("../reviews/AllReviews"));
+const ProductImages = lazy(() => import("./ProductImages"));
 
 // STYLING FOR THIS COMPONENT
 const Container = styled.div`
@@ -276,83 +276,87 @@ function ProductDetails() {
         <>
           {product && (
             <Container>
-              <MetaData title={`${product.name}__ECOM`} />
-              <div className="leftWrapper">
-                <ProductImages product={product} />
-              </div>
-
-              <RightWrapper>
-                <Title>{product.name}</Title>
-                <Description>{product.description}</Description>
-                <Price> ₹ {product.price}</Price>
-                <RatingsWrapper>
-                  <ReactStars {...options} />
-                  <span>({product.numberOfReviews} reviews)</span>
-                </RatingsWrapper>
-                <FilterContainer>
-                  <Filter>
-                    <FilterTitle>Color: </FilterTitle>
-                    <FilterColor color="gray" />
-                    <FilterColor color="yellow" />
-                    <FilterColor color="black" />
-                  </Filter>
-                </FilterContainer>
-                <QuantityWrapper>
-                  <Button
-                    onClick={() =>
-                      setQuantity((pre) => {
-                        if (pre === product.stock) return pre;
-                        else return pre + 1;
-                      })
-                    }
-                  >
-                    +
-                  </Button>
-                  <Quantity>{quantity}</Quantity>
-                  <Button
-                    onClick={() =>
-                      setQuantity((pre) => {
-                        if (pre === 1) {
-                          return 1;
-                        } else return pre - 1;
-                      })
-                    }
-                  >
-                    -
-                  </Button>
-                </QuantityWrapper>
-
-                <div style={{ margin: "2rem 0 ", fontSize: "1.2rem" }}>
-                  Staus :{" "}
-                  {product.stock > 0 ? (
-                    <span style={{ color: "green" }}>In Stock</span>
-                  ) : (
-                    <span style={{ color: "indianred" }}>Out of Stock</span>
-                  )}
+              <Suspense fallback={<div>Loading...</div>}>
+                <MetaData title={`${product.name}__ECOM`} />
+                <div className="leftWrapper">
+                  <ProductImages product={product} />
                 </div>
 
-                <AddToCartButton
-                  onClick={handleAddToCartClick}
-                  disabled={product.stock < 1 ? true : false}
-                >
-                  {product.stock < 1
-                    ? "Out of Stock"
-                    : itemInCart
-                    ? "Go to Cart"
-                    : "Add to Cart"}
-                </AddToCartButton>
+                <RightWrapper>
+                  <Title>{product.name}</Title>
+                  <Description>{product.description}</Description>
+                  <Price> ₹ {product.price}</Price>
+                  <RatingsWrapper>
+                    <ReactStars {...options} />
+                    <span>({product.numberOfReviews} reviews)</span>
+                  </RatingsWrapper>
+                  <FilterContainer>
+                    <Filter>
+                      <FilterTitle>Color: </FilterTitle>
+                      <FilterColor color="gray" />
+                      <FilterColor color="yellow" />
+                      <FilterColor color="black" />
+                    </Filter>
+                  </FilterContainer>
+                  <QuantityWrapper>
+                    <Button
+                      onClick={() =>
+                        setQuantity((pre) => {
+                          if (pre === product.stock) return pre;
+                          else return pre + 1;
+                        })
+                      }
+                    >
+                      +
+                    </Button>
+                    <Quantity>{quantity}</Quantity>
+                    <Button
+                      onClick={() =>
+                        setQuantity((pre) => {
+                          if (pre === 1) {
+                            return 1;
+                          } else return pre - 1;
+                        })
+                      }
+                    >
+                      -
+                    </Button>
+                  </QuantityWrapper>
 
-                <h3 style={{ padding: "2rem 0", textDecoration: "underline" }}>
-                  Rating and Reviews
-                </h3>
-                <SubmitReview productId={productId} />
+                  <div style={{ margin: "2rem 0 ", fontSize: "1.2rem" }}>
+                    Staus :{" "}
+                    {product.stock > 0 ? (
+                      <span style={{ color: "green" }}>In Stock</span>
+                    ) : (
+                      <span style={{ color: "indianred" }}>Out of Stock</span>
+                    )}
+                  </div>
 
-                {product && product.reviews.length <= 0 ? (
-                  <h3>No reviews</h3>
-                ) : (
-                  <AllReviews />
-                )}
-              </RightWrapper>
+                  <AddToCartButton
+                    onClick={handleAddToCartClick}
+                    disabled={product.stock < 1 ? true : false}
+                  >
+                    {product.stock < 1
+                      ? "Out of Stock"
+                      : itemInCart
+                      ? "Go to Cart"
+                      : "Add to Cart"}
+                  </AddToCartButton>
+
+                  <h3
+                    style={{ padding: "2rem 0", textDecoration: "underline" }}
+                  >
+                    Rating and Reviews
+                  </h3>
+                  <SubmitReview productId={productId} />
+
+                  {product && product.reviews.length <= 0 ? (
+                    <h3>No reviews</h3>
+                  ) : (
+                    <AllReviews />
+                  )}
+                </RightWrapper>
+              </Suspense>
             </Container>
           )}
         </>

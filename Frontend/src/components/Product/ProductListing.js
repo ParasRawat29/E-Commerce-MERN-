@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { Suspense } from "react";
+import { lazy } from "react";
 import { MainPageStyles } from "../MainPageStyles";
 import MetaData from "../MetaData";
-import ProductComponent from "./ProductComponent";
+const ProductComponent = lazy(() => import("./ProductComponent"));
 
 function ProductListing() {
   return (
     <MainPageStyles>
       <MetaData title="Products" />
-      <ProductComponent />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ProductComponent />
+      </Suspense>
     </MainPageStyles>
   );
 }

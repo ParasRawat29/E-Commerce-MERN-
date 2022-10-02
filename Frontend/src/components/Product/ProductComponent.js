@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Loader from "../layout/loader/Loader";
 import { useAlert } from "react-alert";
 import { Pagination } from "@mui/material";
 import { clearErrors, getProducts } from "../../redux/actions/productAction";
-import ProductCard from "./ProductCard";
 import { useParams } from "react-router-dom";
 import actionTypes from "../../redux/constats/actionTypes";
 import styled from "styled-components";
+const ProductCard = lazy(() => import("./ProductCard"));
 
 const ProductComponentWrapper = styled.div`
   display: flex;
@@ -63,7 +63,7 @@ function ProductComponent() {
           <div className="productsList">
             {products &&
               products.map((product) => {
-                return <ProductCard product={product} key={product._id} />;
+                return <ProductCard key={product._id} product={product} />;
               })}
           </div>
 

@@ -168,10 +168,22 @@ function Slider() {
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleArrowClick("left")}>
-        <img className="arrow arrow-left" src={leftArrow} alt="" />
+        <img
+          className="arrow arrow-left"
+          src={leftArrow}
+          alt="leftArrow"
+          width="50px"
+          height="50px"
+        />
       </Arrow>
       <Arrow direction="right" onClick={() => handleArrowClick("right")}>
-        <img className="arrow arrow-right" src={rightArrow} alt="" />
+        <img
+          className="arrow arrow-right"
+          src={rightArrow}
+          alt="rightArrow"
+          width="50px"
+          height="50px"
+        />
       </Arrow>
       <Wrapper>
         {SLIDER_DATA.map((slide) => {
@@ -183,7 +195,7 @@ function Slider() {
               activeSlideno={activeSlideno}
             >
               <ImageContainer>
-                <img src={slide.image} alt="" />
+                <img src={slide.image} alt="slidebanner" />
               </ImageContainer>
               <AboutContainer>
                 <div className="title">{slide.title}</div>

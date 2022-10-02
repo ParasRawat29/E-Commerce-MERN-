@@ -131,7 +131,9 @@ function Footer() {
         <div className="cardsWrapper">
           <img
             src="https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/payment-method_69e7ec.svg"
-            alt=""
+            alt="_"
+            width="100px"
+            height="42px"
           />
         </div>
       </ContactWrapper>

@@ -20,7 +20,6 @@ function App() {
     return <h1>Loading....</h1>;
   }
   if (!isLoading && user && user.role === "admin") {
-    console.log("user role-------->", user.role);
     return (
       <div className="App" style={{ overflowX: "hidden" }}>
         <Header
