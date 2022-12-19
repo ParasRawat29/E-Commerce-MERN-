@@ -135,15 +135,6 @@ const FilterTitle = styled.span`
   font-size: 1.3rem;
   font-weight: lighter;
 `;
-const FilterSize = styled.select`
-  padding: 2px 5px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  outline: none;
-`;
-const FilterSizeOption = styled.option`
-  cursor: pointer;
-`;
 
 const QuantityWrapper = styled.div`
   display: inline-flex;

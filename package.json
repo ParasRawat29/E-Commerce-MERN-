@@ -7,7 +7,7 @@
     "start": "node Backend/server.js",
     "server": "nodemon Backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false && npm install --prefix Frontend && npm run build --prefix Frontend"
+    "build": "cd Backend && npm install  && cd ../Frontend && npm install && npm run build"
   },
   "author": "Paras Rawat",
   "license": "ISC",

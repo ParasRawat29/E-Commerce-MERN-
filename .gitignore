@@ -19,6 +19,8 @@ node_modules
 /Frontend/.env.test.local
 /Frontend/.env.production.local
 
+/data
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
