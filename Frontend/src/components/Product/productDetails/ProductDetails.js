@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import actionTypes from "../../../redux/constats/actionTypes";
 import { lazy } from "react";
+import SpinnerLoader from "../../layout/loader/SpinnerLoader";
 const SubmitReview = lazy(() => import("../reviews/SubmitReview"));
 const AllReviews = lazy(() => import("../reviews/AllReviews"));
 const ProductImages = lazy(() => import("./ProductImages"));
@@ -267,7 +268,7 @@ function ProductDetails() {
         <>
           {product && (
             <Container>
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<SpinnerLoader />}>
                 <MetaData title={`${product.name}__ECOM`} />
                 <div className="leftWrapper">
                   <ProductImages product={product} />

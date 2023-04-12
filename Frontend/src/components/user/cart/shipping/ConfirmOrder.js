@@ -7,6 +7,7 @@ import CheckOutSteps from "./CheckOutSteps";
 import ConfirmOrderDetails from "./ConfirmOrderDetails";
 import { checkoutHandler } from "./logic";
 import actionTypes from "../../../../redux/constats/actionTypes";
+import SpinnerLoader from "../../../layout/loader/SpinnerLoader";
 
 // styles for this container
 const Container = styled.div`
@@ -191,7 +192,7 @@ function ConfirmOrder() {
                 </section>
               </>
             ) : (
-              <h1>Loading...</h1>
+              <SpinnerLoader />
             )}
           </>
         )}

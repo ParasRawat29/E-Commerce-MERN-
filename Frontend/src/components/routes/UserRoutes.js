@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import SpinnerLoader from "../layout/loader/SpinnerLoader";
 const Home = lazy(() => import("../layout/home/Home"));
 const Auth = lazy(() => import("../layout/auth/Auth"));
 const ProductDetails = lazy(() =>
@@ -21,7 +22,7 @@ const ChangePassword = lazy(() => import("../user/profile/ChangePassword"));
 function UserRoutes({ isSidebarOpen, setIsSidebarOpen }) {
   return (
     <div style={{ marginTop: "90px" }}>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<SpinnerLoader />}>
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route

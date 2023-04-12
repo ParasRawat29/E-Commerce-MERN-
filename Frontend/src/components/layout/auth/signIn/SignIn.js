@@ -18,7 +18,18 @@ function SignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(login(details.email, details.password));
+    return;
+  };
 
+  const handleDemoUserLogin = (e) => {
+    e.preventDefault();
+    dispatch(login("parasrawat29pr@gmail.com", "00000"));
+    return;
+  };
+
+  const handleDemoAdminLogin = (e) => {
+    e.preventDefault();
+    dispatch(login("def@gmail.com", "00000"));
     return;
   };
 
@@ -97,6 +108,23 @@ function SignIn() {
                 </div>
                 <button type="submit" class="submitBtn" onClick={handleSubmit}>
                   Login
+                </button>
+
+                <button
+                  type="submit"
+                  style={{ background: "lightcoral" }}
+                  class="submitBtn"
+                  onClick={handleDemoUserLogin}
+                >
+                  Demo User Login
+                </button>
+                <button
+                  type="submit"
+                  style={{ background: "lightcoral" }}
+                  class="submitBtn"
+                  onClick={handleDemoAdminLogin}
+                >
+                  Demo Admin Login
                 </button>
               </form>
             </div>

@@ -5,6 +5,7 @@ import { loadUser } from "./redux/actions/userAction";
 import LeftSidebar from "./components/layout/leftsidebar/LeftSidebar";
 import AdminRoutes from "./components/routes/AdminRoutes";
 import UserRoutes from "./components/routes/UserRoutes";
+import SpinnerLoader from "./components/layout/loader/SpinnerLoader";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -17,7 +18,7 @@ function App() {
   }, [dispatch]);
 
   if (isLoading) {
-    return <h1>Loading....</h1>;
+    return <SpinnerLoader />;
   }
   if (!isLoading && user && user.role === "admin") {
     return (

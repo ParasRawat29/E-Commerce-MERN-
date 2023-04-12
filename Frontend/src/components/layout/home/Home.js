@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "../../ErrorBoundary";
+import SpinnerLoader from "../loader/SpinnerLoader";
 const MetaData = lazy(() => import("../../MetaData"));
 const Footer = lazy(() => import("./Footer"));
 const GridListing = lazy(() => import("./GridListing"));
@@ -11,7 +12,7 @@ function Home() {
   return (
     <div>
       <ErrorBoundary FallbackComponenet={ErrorFallback} onReset={() => {}}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<SpinnerLoader />}>
           <MetaData title="Ecommerce" />
           <Slider />
           <GridListing />

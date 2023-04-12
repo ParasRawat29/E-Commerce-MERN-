@@ -73,7 +73,6 @@ exports.getAllOrders = catchAsyncError(async (req, res, next) => {
 // update order status
 exports.updateOrderStatus = catchAsyncError(async (req, res, next) => {
   const order = await Order.findById(req.params.orderId);
-  console.log(req.body);
   if (!order) {
     return next(new ErrorHandler("No Order Exist", 404));
   }
